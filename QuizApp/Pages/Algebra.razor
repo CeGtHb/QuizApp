@@ -1,6 +1,56 @@
 ﻿@page "/algebra"
+@using QuizApp.Models
+
 <h3>Algebra</h3>
 
-@code {
-    
+
+<h4>Pătrate perfecte</h4>
+
+
+@if (isFinished)
+{
+    <p>Felicitări! Ai parcurs toate cele 25 de întrebări.</p>
+
+    <button @onclick="RestartQuiz">
+        Reîncepe quiz-ul
+    </button>
 }
+else
+{
+
+    <p style="font-size: 18px;">
+        Întrebarea @(questionIndex + 1) din @questions.Count
+    </p>
+
+    <p style="font-size: 28px; font-weight: bold;">
+        @currentQuestion.Text
+    </p>
+
+    <div style="min-height: 65px; font-size: 24px;">
+        @if (showAnswer)
+        {
+            <p>Răspuns corect: @currentQuestion.CorrectAnswer</p>
+        }
+    </div>
+
+    <button class="btn btn-primary"
+            style="font-size: 20px; padding: 12px 24px;"
+            @onclick="showAnswer ? NextQuestion : RevealAnswer">
+
+        @if (!showAnswer)
+        {
+            <text>Arată răspunsul</text>
+        }
+        else if (questionIndex == questions.Count - 1)
+        {
+            <text>Finalizează quiz-ul</text>
+        }
+        else
+        {
+            <text>Următoarea întrebare</text>
+        }
+    </button>
+
+ 
+}
+
