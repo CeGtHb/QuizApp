@@ -21,11 +21,27 @@
                 Acasă
             </NavLink>
         </div>
+
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="algebra">
+            <button class="nav-link w-100 text-start text-white"
+                    @onclick="ToggleAlgebra">
                 Algebra
-            </NavLink>
+                <span class="float-end">
+                    @(isAlgebraExpanded ? "▼" : "▶")
+                </span>
+            </button>
         </div>
+
+        @if (isAlgebraExpanded)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link ps-4"
+                         href="algebra">
+                    Pătrate perfecte
+                </NavLink>
+            </div>
+        }
+
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="geometry">
@@ -40,6 +56,7 @@
 
 @code {
     private bool collapseNavMenu = true;
+    private bool isAlgebraExpanded = false;
 
     private string? NavMenuCssClass =>
         collapseNavMenu ? "collapse" : null;
@@ -48,4 +65,11 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+    
+    private void ToggleAlgebra()
+    {
+        isAlgebraExpanded = !isAlgebraExpanded;
+    }
+
 }
+
