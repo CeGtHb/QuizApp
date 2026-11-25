@@ -1,0 +1,23 @@
+
+# Compiled files
+bin/
+obj/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Test results
+TestResults/
+
+# Local environment
+.env
+.env.*
+
+# Junie
+.junie/
