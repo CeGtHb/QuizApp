@@ -1,0 +1,108 @@
+﻿@page "/algebra/perfect-squares"
+
+<div class="quiz-container">
+
+    <h1 class="category-title">Algebra</h1>
+    <h2 class="quiz-title">Pătrate perfecte</h2>
+
+    <div class="quiz-tabs">
+        <button type="button"
+                class="quiz-tab @(!isTheory ? "active" : "")"
+                @onclick="ShowExercises">
+            Exerciții
+        </button>
+
+        <button type="button"
+                class="quiz-tab @(isTheory ? "active" : "")"
+                @onclick="ShowTheory">
+            Teorie
+        </button>
+    </div>
+
+    @if (isTheory)
+    {
+        <div class="question">
+            Ce este un pătrat perfect?
+        </div>
+
+        @if (showTheoryAnswer)
+        {
+            <div class="theory-answer">
+                <p>
+                    Un număr natural care poate fi scris
+                    ca pătratul unui număr natural.
+                </p>
+
+                <p class="formula">n = k²</p>
+
+                <p>Exemple: 0, 1, 4, 9, 16, 25, ...</p>
+            </div>
+        }
+
+        <button type="button"
+                class="quiz-button"
+                @onclick="ToggleTheoryAnswer">
+            @(showTheoryAnswer
+                ? "Ascunde răspunsul"
+                : "Arată răspunsul")
+        </button>
+    }
+    else if (isFinished)
+    {
+        <p>
+            Felicitări! Ai parcurs toate cele
+            @questions.Count de întrebări.
+        </p>
+
+        <button type="button"
+                class="quiz-button"
+                @onclick="RestartQuiz">
+            Reîncepe quiz-ul
+        </button>
+    }
+    else
+    {
+        <p class="question-counter">
+            Întrebarea @(questionIndex + 1) din @questions.Count
+        </p>
+
+        <div class="question">
+            Calculează pătratul numărului:
+        </div>
+
+        <div class="formula">
+            @currentQuestion.Text
+        </div>
+
+        <div class="answer">
+            @if (showAnswer)
+            {
+                <span class="answer-label">Răspuns corect</span>
+
+                <div class="formula">
+                    @currentQuestion.CorrectAnswer
+                </div>
+            }
+        </div>
+
+        <button type="button"
+                class="quiz-button"
+                @onclick="showAnswer ? NextQuestion : RevealAnswer">
+
+            @if (!showAnswer)
+            {
+                <text>Arată răspunsul</text>
+            }
+            else if (questionIndex == questions.Count - 1)
+            {
+                <text>Finalizează quiz-ul</text>
+            }
+            else
+            {
+                <text>Următoarea întrebare</text>
+            }
+
+        </button>
+    }
+
+</div>

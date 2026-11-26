@@ -3,21 +3,24 @@ using QuizApp.Models;
 
 namespace QuizApp.Pages;
 
-public partial class Algebra : ComponentBase
+public partial class PerfectSquares : ComponentBase
 {
     private List<Question> questions = new();
     private Question currentQuestion = new();
 
-    private int questionIndex = 0;
-    private bool showAnswer = false;
-    private bool isFinished = false;
+    private int questionIndex;
+    private bool showAnswer;
+    private bool isFinished;
+
+    private bool isTheory;
+    private bool showTheoryAnswer;
 
     protected override void OnInitialized()
     {
         questions = Enumerable.Range(1, 25)
             .Select(number => new Question
             {
-                Text = $"Cât este {number}²?",
+                Text = $"{number}² = ?",
                 CorrectAnswer = number * number
             })
             .OrderBy(_ => Random.Shared.Next())
@@ -44,7 +47,7 @@ public partial class Algebra : ComponentBase
         currentQuestion = questions[questionIndex];
         showAnswer = false;
     }
-    
+
     private void RestartQuiz()
     {
         questions = questions
@@ -57,5 +60,20 @@ public partial class Algebra : ComponentBase
         showAnswer = false;
         isFinished = false;
     }
-    
+
+    private void ShowExercises()
+    {
+        isTheory = false;
+    }
+
+    private void ShowTheory()
+    {
+        isTheory = true;
+        showTheoryAnswer = false;
+    }
+
+    private void ToggleTheoryAnswer()
+    {
+        showTheoryAnswer = !showTheoryAnswer;
+    }
 }
