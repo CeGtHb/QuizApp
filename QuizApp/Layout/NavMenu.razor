@@ -1,75 +1,70 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">QuizApp</a>
-        <button title="Navigation menu"
-                class="navbar-toggler"
-                @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+﻿<div class="nav-header">
+    <a class="brand" href="" @onclick="CloseNavMenu">
+        QuizApp
+    </a>
+
+    <button class="menu-toggle"
+            type="button"
+            aria-label="Meniu de navigare"
+            aria-expanded="@(!isMenuCollapsed)"
+            @onclick="ToggleNavMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable"
-     @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link"
-                     href=""
-                     Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu"
-                      aria-hidden="true"></span>
-                Acasă
-            </NavLink>
-        </div>
+<nav class="navigation @MenuCssClass">
+    <NavLink class="nav-link"
+             href=""
+             Match="NavLinkMatch.All"
+             @onclick="CloseNavMenu">
+        Acasă
+    </NavLink>
 
-        <div class="nav-item px-3">
-            <button class="nav-link w-100 text-start text-white"
-                    @onclick="ToggleAlgebra">
-                Algebra
-                <span class="float-end">
-                    @(isAlgebraExpanded ? "▼" : "▶")
-                </span>
-            </button>
-        </div>
+    <button class="nav-link category"
+            type="button"
+            aria-expanded="@isAlgebraExpanded"
+            @onclick="ToggleAlgebra">
+        Algebra
+        <span>@(isAlgebraExpanded ? "▾" : "▸")</span>
+    </button>
 
-        @if (isAlgebraExpanded)
-        {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link ps-4"
-                         href="algebra">
-                    Pătrate perfecte
-                </NavLink>
-            </div>
-        }
+    @if (isAlgebraExpanded)
+    {
+        <NavLink class="nav-link subcategory"
+                 href="algebra"
+                 @onclick="CloseNavMenu">
+            Pătrate perfecte
+        </NavLink>
+    }
 
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="geometry">
-                Geometrie
-            </NavLink>
-        </div>        
-        
-        
-        
-    </nav>
-</div>
+    <NavLink class="nav-link"
+             href="geometry"
+             @onclick="CloseNavMenu">
+        Geometrie
+    </NavLink>
+</nav>
 
 @code {
-    private bool collapseNavMenu = true;
-    private bool isAlgebraExpanded = false;
+    private bool isMenuCollapsed = true;
+    private bool isAlgebraExpanded = true;
 
-    private string? NavMenuCssClass =>
-        collapseNavMenu ? "collapse" : null;
+    private string MenuCssClass =>
+        isMenuCollapsed ? "collapsed" : string.Empty;
 
     private void ToggleNavMenu()
     {
-        collapseNavMenu = !collapseNavMenu;
+        isMenuCollapsed = !isMenuCollapsed;
     }
-    
+
+    private void CloseNavMenu()
+    {
+        isMenuCollapsed = true;
+    }
+
     private void ToggleAlgebra()
     {
         isAlgebraExpanded = !isAlgebraExpanded;
     }
-
 }
-
