@@ -1,10 +1,135 @@
 ﻿@page "/algebra/perfect-squares"
 
 <div class="quiz-container">
+    <div class="quiz-header">
+        <h1 class="category-title">Algebra</h1>
 
-    <h1 class="category-title">Algebra</h1>
+        <button type="button"
+                class="settings-button"
+                aria-label="Setări quiz"
+                aria-expanded="@(showSettings ? "true" : "false")"
+                title="Setări quiz"
+                @onclick="ToggleSettings">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+                <path d="M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8Z"/>
+                <path d="M9.7 3h4.6l.5 2.5 1.7 1 2.4-.8
+                     2.3 4-1.9 1.7v2l1.9 1.7-2.3 4
+                     -2.4-.8-1.7 1-.5 2.5H9.7l-.5-2.5
+                     -1.7-1-2.4.8-2.3-4 1.9-1.7v-2
+                     L2.8 9.7l2.3-4 2.4.8 1.7-1Z"/>
+            </svg>
+        </button>
+    </div>
+    
     <h2 class="quiz-title">Pătrate perfecte</h2>
+        
+    @if (showSettings)
+    {
+        <div class="settings-panel">
+            <div class="settings-header">
+                <h3>Setări quiz</h3>
 
+                <button type="button"
+                        class="settings-close"
+                        aria-label="Închide setările"
+                        @onclick="CancelSettings">
+                    &times;
+                </button>
+            </div>
+
+            <fieldset class="settings-section">
+                <legend>Interval numeric</legend>
+
+                <div class="settings-range">
+                    <label>
+                        De la
+                        <input type="number"
+                               min="1"
+                               max="100"
+                               @bind="draftSettings.Min"
+                               @bind:event="oninput"/>
+                    </label>
+
+                    <label>
+                        Până la
+                        <input type="number"
+                               min="1"
+                               max="100"
+                               @bind="draftSettings.Max"
+                               @bind:event="oninput"/>
+                    </label>
+                </div>
+
+                @if (AreSettingsValid)
+                {
+                    <div class="settings-info">
+                        Număr de întrebări:
+                        @(draftSettings.Max - draftSettings.Min + 1)
+                    </div>
+                }
+                else
+                {
+                    <div class="settings-error">
+                        Introdu un interval valid între 1 și 100.
+                    </div>
+                }
+            </fieldset>
+
+            <fieldset class="settings-section">
+                <legend>Ordinea întrebărilor</legend>
+
+                <InputRadioGroup @bind-Value="draftSettings.Order">
+                    <label class="settings-option">
+                        <InputRadio Value="QuestionOrder.Random"/>
+                        Aleatorie
+                    </label>
+
+                    <label class="settings-option">
+                        <InputRadio Value="QuestionOrder.Ascending"/>
+                        Crescătoare
+                    </label>
+
+                    <label class="settings-option">
+                        <InputRadio Value="QuestionOrder.Descending"/>
+                        Descrescătoare
+                    </label>
+                </InputRadioGroup>
+            </fieldset>
+
+            <div class="settings-actions">
+                <button type="button"
+                        class="settings-secondary"
+                        @onclick="ResetSettings">
+                    Implicit
+                </button>
+
+                <div class="settings-actions-right">
+                    <button type="button"
+                            class="settings-secondary"
+                            @onclick="CancelSettings">
+                        Anulează
+                    </button>
+
+                    <button type="button"
+                            class="settings-primary"
+                            disabled="@(!AreSettingsValid)"
+                            @onclick="ApplySettings">
+                        Aplică
+                    </button>
+                </div>
+            </div>
+        </div>
+    }   
+    
     <div class="quiz-tabs">
         <button type="button"
                 class="quiz-tab @(!isTheory ? "active" : "")"
@@ -48,6 +173,10 @@
                 ? "Ascunde răspunsul"
                 : "Arată răspunsul")
         </button>
+    }
+    else if (questions.Count == 0)
+    {
+        <p>Se încarcă quiz-ul...</p>
     }
     else if (isFinished)
     {

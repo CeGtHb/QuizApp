@@ -104,3 +104,161 @@
     outline: 2px solid #2563eb;
     outline-offset: 3px;
 }
+
+.quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-button,
+.settings-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #444;
+    cursor: pointer;
+}
+
+.settings-button:hover,
+.settings-close:hover {
+    background-color: #f0f0f0;
+}
+
+.settings-panel {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.settings-close {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.settings-section {
+    min-width: 0;
+    padding: 1rem 0;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.settings-section legend {
+    float: none;
+    width: auto;
+    padding-top: 1rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.settings-range {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.settings-range label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.settings-range input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.settings-info,
+.settings-error {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.settings-info {
+    color: #666;
+}
+
+.settings-error {
+    color: #b91c1c;
+}
+
+.settings-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    cursor: pointer;
+}
+
+.settings-option ::deep input {
+    accent-color: #2563eb;
+}
+
+.settings-actions,
+.settings-actions-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.settings-actions {
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.settings-primary,
+.settings-secondary {
+    padding: 0.5rem 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.settings-secondary {
+    background-color: #fff;
+    color: #444;
+}
+
+.settings-secondary:hover {
+    background-color: #f5f5f5;
+}
+
+.settings-primary {
+    border-color: #2563eb;
+    background-color: #2563eb;
+    color: #fff;
+}
+
+.settings-primary:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.settings-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
