@@ -20,7 +20,7 @@ public partial class PerfectSquares : ComponentBase
         questions = Enumerable.Range(1, 25)
             .Select(number => new Question
             {
-                Text = $"{number}² = ?",
+                Text = $"{number}^2 = ?",
                 CorrectAnswer = number * number
             })
             .OrderBy(_ => Random.Shared.Next())

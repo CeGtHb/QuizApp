@@ -72,6 +72,10 @@
     margin-block: 0.5rem 1rem;
 }
 
+.answer-hidden {
+    visibility: hidden;
+}
+
 .theory-answer {
     font-size: 1.05rem;
     line-height: 1.6;

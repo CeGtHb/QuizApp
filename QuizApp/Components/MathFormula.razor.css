@@ -1,0 +1,9 @@
+﻿.math-formula {
+    width: 100%;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.math-formula ::deep mjx-container {
+    margin: 0;
+}

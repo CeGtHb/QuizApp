@@ -33,8 +33,10 @@
                     ca pătratul unui număr natural.
                 </p>
 
-                <p class="formula">n = k²</p>
-
+                <div class="formula">
+                    <MathFormula Latex="n = k^2"/>
+                </div>
+                
                 <p>Exemple: 0, 1, 4, 9, 16, 25, ...</p>
             </div>
         }
@@ -71,20 +73,17 @@
         </div>
 
         <div class="formula">
-            @currentQuestion.Text
+            <MathFormula Latex="@currentQuestion.Text"/>
         </div>
+        
+        <div class="answer @(showAnswer ? "" : "answer-hidden")">
+            <span class="answer-label">Răspuns corect</span>
 
-        <div class="answer">
-            @if (showAnswer)
-            {
-                <span class="answer-label">Răspuns corect</span>
-
-                <div class="formula">
-                    @currentQuestion.CorrectAnswer
-                </div>
-            }
+            <div class="formula">
+                <MathFormula Latex="@currentQuestion.CorrectAnswer.ToString()"/>
+            </div>
         </div>
-
+        
         <button type="button"
                 class="quiz-button"
                 @onclick="showAnswer ? NextQuestion : RevealAnswer">
